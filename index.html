@@ -1,43 +1,40 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
   <head>
     <meta charset="utf-8">
     <title>DasheOS</title>
     <style>
-      html, body {
+      html, body{
         min-height: 100vh;
         margin: 0;
         padding: 0;
       }
-      body {
+      body{
         background-color: #003366d5;
-        background-image: url("berg.jpg");
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
-        color: rgb(8, 23, 88);
+        background-repeat:no-repeat;
+        background-image: url(berg.jpg);
+        color: rgb(8,23,88);
         font-family: Arial, sans-serif;
         text-align: left;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        text-shadow: 2px 2px 4px
+      rgba(0, 0, 0, 0.5);
         padding-bottom: 60px;
       }
       h1 {
         font-family: Arial, sans-serif;
-        font-size: 65px;
+        font-size:65px;
         text-shadow: 3px 3px 5px black;
         padding: 4px;
         color: #fff;
         margin: 0;
       }
-      img {
-        margin: 20px 0 0 0px;
-        border: 2px solid #ccc;
+      img{
+        margin: 20px 0 0 0px
       }
-      p2 {
-        margin: 20px 0 0 0px;
-      }
-      a {
-        display: block;
+      a{
+        display:block;
         margin: 20px 0;
         color: #940808;
         text-decoration: underline;
@@ -45,277 +42,162 @@
         text-shadow: 1px 1px 3px rgb(0, 0, 0);
       }
       .topbar {
-        position: fixed;
+        position:fixed;
         top: 0;
         left: 0;
         right: 0;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         min-height: 48px;
         padding: 12px 16px;
         color: #fff;
         background: rgba(0, 0, 0, 0.8);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
         z-index: 1000;
+        box-sizing: border-box;
       }
-      .top-left, .top-right {
-        font-size: 18px;
-        font-weight: bold;
-      }
-      .top-left { order: 2; }
-      .top-right { order: 3; margin-left: auto; }
-      #welcomeopen { order: 1; margin-right: auto; }
-      .windowheader:active { cursor: grabbing; }
-      .window-content { padding: 20px; }
-      #welcomeopen {
-        cursor: pointer;
-        color: #fff;
-        font-weight: bold;
-        padding: 4px 12px;
-        border-radius: 4px;
-        transition: background-color 0.2s;
+      .topbar > p {
         margin: 0;
+        font-weight: 700;
+        line-height: 1;
       }
-      #welcomeopen:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+      .top-right {
+        margin-left: auto;
+        font-weight: 600;
+        white-space: nowrap;
       }
-      #desktopApps {
-        position: relative;
-        width: 100%;
-        height: 100%;
+      .window {
+       position: absolute;
+       display: flex;
+       flex-direction: column;
+       border-radius: 16px;
+       backdrop-filter: blur(4px);
+       background-color: rgba(0, 0, 0, 0.4);
+       min-width: 280px;
+       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+       overflow: hidden;
       }
-      .taskbar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 60px;
-        background: rgba(0, 0, 0, 0.8);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        display: flex;
-        align-items: center;
-        padding: 0 12px;
-        z-index: 999;
+      .window {
+       position: absolute;
+       background: rgba(20, 20, 20, 0.9);
+       color: #000;
+       border: 1px solid #555;
+       border-radius: 8px;
+       width: 400px;
+       z-index: 100;
       }
-      .taskbar-content {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: flex-start;
+
+      .windowheader {
+       background: #333;
+       padding: 8px 12px;
+       cursor: move;
+       user-select: none;
       }
-      .taskbar-apps {
-        display: flex;
-        gap: 12px;
-        align-items: center;
+
+      .window {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 16px;
       }
-      .taskbar-app {
-        width: 48px;
-        height: 48px;
-        border: none;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 24px;
-        transition: all 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .taskbar-app:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: scale(1.1);
-      }
-      .taskbar-app:active {
-        background: rgba(255, 255, 255, 0.3);
-      }
+      
     </style>
-    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
-  
   <body>
     <div class="topbar">
       <p style="cursor: pointer" id="welcomeopen">DasheOS</p>
-      <span class="top-right">6/21/2023 3:41 PM</span>
+      <span class="top-right">9/19/2026 11:19</span>
     </div>
-    
     <div id="desktopApps">
-      <div class="window" id="Hackspace" style="display: none; left: 50%; top: 80px;">
+      <div class="window" id="Hackspace" style="display: flex; left: 50%; top: 80px;">
         <div class="windowheader" data-windowid="Hackspace">
-          <span class="headertext">Hackspace</span>
+          <span class=" headertext">Hackspace</span>
           <div class="window-controls">
             <button class="maximizebutton" data-windowid="Hackspace" type="button"></button>
             <div class="closebutton" data-windowid="Hackspace"></div>
           </div>
         </div>
         <div class="window-content">
-          <h1 style="margin: 0 0 20px 0;">Projekt-Arbeitsbereich</h1>
+          <h1 style margin: 0 0 20px 0;">Project-workspace</h1>
           <p>
-            Welcome to your command center.
-            Here, you maintain a complete overview
-            of your active projects,
-            linked repositories, and their status.
+            Wecome to your command center. Here, you maintain a complete overview of your active projects, linked repositories, and their status.
             All key information at a glance,
-            so you always know
-            where you stand and what’s next.
+            so you always know where you stand and whats next.
           </p>
-          
-          <div id="repo-stats" style="margin: 20px 0; padding: 15px; background: rgba(0, 255, 0, 0.05); border: 1px solid rgba(0, 255, 0, 0.2); border-radius: 4px; font-family: monospace; color: #00ff00; line-height: 1.5;">
-            <div>> Verbinde mit GitHub-API...</div>
-          </div>
-          <img src="Winterberg.jpg" width="500" height="300" alt="Winterberg">
+
+        <div id="repo-stats" style="margin: 20px0; padding: 15px; background: rgba(182, 29, 29, 0.05); border: 1px solid rgba(0,255,0,0.2); border-radius: 4px; font-family: monospace; color:00ff00;line-height: 1.5;">
+          <div>> Connecting with GitHub API...</div>
+        </div>
+        <img src="Winterberg.jpg" width="500" height="300" alt="Winterberg">
+      </div>
+    </div>
+
+    <div class="window" id="welcome" style="display: flex; left: 50%; top: 80px;">
+      <div class="windowheader" data-windowid="welcome">
+        <span class="headertext">Welcome to DasheOS</span>
+        <div class=" window-contols">
+          <button class="maximizbutton" data-windowid="welcome" type="button"></button>
+          <div class="closebutton" data-windowid="welcome"></div>
         </div>
       </div>
-
-      <div class="window" id="welcome" style="display: none; left: 50%; top: 80px;">
-        <div class="windowheader" data-windowid="welcome">
-          <span class="headertext">Welcome to DasheOS</span>
-          <div class="window-controls">
-            <button class="maximizebutton" data-windowid="welcome" type="button"></button>
-            <div class="closebutton" data-windowid="welcome"></div>
-          </div>
-        </div>
-        <div class="window-content">
-          <h1 style="margin: 0 0 20px 0;">welcome to dasheOS</h1>
-          <h2>This is the best OS you've ever used</h2>
-          <p>Hello user of this totally awesome OS!</p>
-          <img src="Bergmitsee.jpg" alt="Berg mit See" width="500" height="300">
-          <br>
-          <p2>Isn't this a beautiful picture?</p2>
+      <div class="window-content">
+        <h1 style="margin: 0 0 20px 0;">welcome to DasheOS<h1>
+        <h2>This is the best OS you've ever used</h2>
+        <p> hello user of this totally awesome OS!</p>
+        <img src="Bergmitsee.jpg" alt="Bergmitsee" width="500" height="300">
+        <p2>Isn't it a beautiful picture?</p2>
+      </div>
+    </div>
+    
+    <div class="window" id="terminal" style="display: flex; left: 150px; top: 120px; width:550px;">
+      <div class="windowheader" data-windowid="terminal">
+        <span class="headertext">Dasheterm</span>
+        <div class="window-contols">
+          <button class="maximizebutton" data-windowid="terminal" type="button"></button>
+          <div class="closebutton" daa-windowid="terminal"></div>
         </div>
       </div>
-
-      <div class="window" id="terminal" style="display: none; left: 150px; top: 120px; width: 550px;">
-        <div class="windowheader" data-windowid="terminal">
-          <span class="headertext">Hackterm</span>
-          <div class="window-controls">
-            <button class="maximizebutton" data-windowid="terminal" type="button"></button>
-            <div class="closebutton" data-windowid="terminal"></div>
+      <div class="window-content" id="terminal-content" style="background: '#b0000b'; color: #00ff00; font-family: monospace; padding: 15px; height: 320px; display: flex;
+      flex-direction: column; border-radius: 0 0 12px; position: relative; overflow: hidden;">
+      <canvas is="matrix-canvas" style="display: flex; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;"></canvas>
+      <div id="terminal-cli-wrapper" style="display: flex; flex-direction: column; height:100%; width: 100%;">
+        <div id="terminal-history" style="flex-grow: 1; overflow-y: auto; white-space: pre-wrap; margin-bottom: 10px; font-size: 14px; line-height: 1.4;">welcome to 
+        Dasheterm type 'help' for a list of commands.</div>
+          <div style="display: flex; align-items: enter; font-size: 14px;">
+            <span style="color: #88ff88; margin-right: 8px; user-select: none;">Dasheos@user:~%</span>
+            <input type="text" id="terminal-input" style="flex-grow: 1;background: transparent; border: none; color: #00ff00; font-family: monospace; font-size:14px; outline:none;" />
           </div>
-        </div>
-        <div class="window-content" id="terminal-content" style="background: #000; color: #00ff00; font-family: monospace; padding: 15px; height: 320px; display: flex; flex-direction: column; border-radius: 0 0 12px 12px; position: relative; overflow: hidden;">
-          <canvas id="matrix-canvas" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;"></canvas>
-
-          <div id="terminal-cli-wrapper" style="display: flex; flex-direction: column; height: 100%; width: 100%;">
-            <div id="terminal-history" style="flex-grow: 1; overflow-y: auto; white-space: pre-wrap; margin-bottom: 10px; font-size: 14px; line-height: 1.4;">welcome to Hackterm type 'help' for a list of commands.</div>
-      
-            <div style="display: flex; align-items: center; font-size: 14px;">
-              <span style="color: #88ff88; margin-right: 8px; user-select: none;">Dasheos@user:~$</span>
-              <input type="text" id="terminal-input" style="flex-grow: 1; background: transparent; border: none; color: #00ff00; font-family: monospace; font-size: 14px; outline: none;" autocomplete="off" spellcheck="false" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="window" id="app3" style="display: none; left: 100px; top: 150px; width: 320px;">
-        <div class="windowheader" data-windowid="app3">
-          <span class="headertext">Calculator</span>
-          <div class="window-controls">
-            <button class="maximizebutton" data-windowid="app3" type="button"></button>
-            <div class="closebutton" data-windowid="app3"></div>
-          </div>
-        </div>
-        <div class="window-content" style="padding: 15px;">
-          <div id="calculator-display" style="background: #1a1a1a; color: #00ff00; padding: 15px; border-radius: 4px; font-size: 28px; text-align: right; margin-bottom: 10px; font-family: monospace; min-height: 40px; border: 1px solid rgba(0, 255, 0, 0.3);">0</div>
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
-            <button class="calc-btn" onclick="calculatorClear()" style="background: #ff4444;">C</button>
-            <button class="calc-btn" onclick="calculatorAppend('/')" style="background: #ff9800;">/</button>
-            <button class="calc-btn" onclick="calculatorAppend('*')" style="background: #ff9800;">×</button>
-            <button class="calc-btn" onclick="calculatorBackspace()" style="background: #ff4444;">←</button>
-            
-            <button class="calc-btn" onclick="calculatorAppend('7')">7</button>
-            <button class="calc-btn" onclick="calculatorAppend('8')">8</button>
-            <button class="calc-btn" onclick="calculatorAppend('9')">9</button>
-            <button class="calc-btn" onclick="calculatorAppend('-')" style="background: #ff9800;">−</button>
-            
-            <button class="calc-btn" onclick="calculatorAppend('4')">4</button>
-            <button class="calc-btn" onclick="calculatorAppend('5')">5</button>
-            <button class="calc-btn" onclick="calculatorAppend('6')">6</button>
-            <button class="calc-btn" onclick="calculatorAppend('+')" style="background: #ff9800;">+</button>
-            
-            <button class="calc-btn" onclick="calculatorAppend('1')">1</button>
-            <button class="calc-btn" onclick="calculatorAppend('2')">2</button>
-            <button class="calc-btn" onclick="calculatorAppend('3')">3</button>
-            <button class="calc-btn" onclick="calculatorAppend('.')" style="background: #ff9800;">.</button>
-            
-            <button class="calc-btn" onclick="calculatorAppend('0')" style="grid-column: span 2;">0</button>
-            <button class="calc-btn" onclick="calculatorAppend('%')" style="background: #ff9800;">%</button>
-            <button class="calc-btn" onclick="calculatorEquals()" style="background: #4CAF50; grid-column: span 1;">=</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="window" id="app5" style="display: none; left: 100px; top: 150px; width: 320px;">
-        <div class="windowheader" data-windowid="app5">
-          <span class="headertext">Hacknotes</span>
-          <div class="window-controls">
-            <button class="maximizebutton" data-windowid="app5" type="button"></button>
-            <div class="closebutton" data-windowid="app5"></div>
-          </div>
-        </div>
-        <div class="window-content" style="padding: 15px;">
-          <textarea style="width: 100%; height: 180px; resize: none; box-sizing: border-box; background: #222; color: #fff; border: 1px solid #444; padding: 10px; font-family: monospace; border-radius: 4px;"></textarea>
-        </div> 
-      </div>
-
-      <div class="window" id="app6" style="display:none; left:100px; top: 150px; width: 330px;">
-        <div class="windowheader" data-windowid="app6">
-          <span class="headertext">Hackclock</span>
-          <div class="window-controls">
-            <button class="maximizebutton" data-windowid="app6" type="button"></button>
-            <div class="closebutton" data-windowid="app6"></div>
-          </div>
-        </div>
-        <div class="window-content" style="padding:15px; color: #fff; font-family: monospace;">
-          <div style="text-align: center; margin-bottom: 20px;">
-            <div style="font-size: 11px; color: #00ff00; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;">Live-time</div>
-            <div id="clock-display" style="background: #1a1a1a; color: #00ff00; padding: 12px; border-radius: 6px; font-size: 32px; border: 1px solid rgba(0, 255, 0, 0.3); box-shadow: inset 0 0 10px rgba(0,255,0,0.2);">00:00:00</div>
-          </div>
-
-          <hr style="border: 0; border-top: 1px dashed rgba(255, 255, 255, 0.2); margin: 15px 0;">
-
-          <div style="text-align: center;">
-            <div style="font-size: 11px; color: #ff9800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;">Countdown Timer</div>
-            <div id="timer-display" style="background: #1a1a1a; color: #ff9800; padding: 10px; border-radius: 6px; font-size: 26px; margin-bottom: 12px; border: 1px solid rgba(255, 152, 0, 0.3);">00:00</div>
-        
-            <div id="timer-inputs" style="display: flex; justify-content: center; gap: 8px; margin-bottom: 15px;">
-              <input type="number" id="timer-min" min="0" max="99" placeholder="Min" style="width: 65px; background: #222; border: 1px solid #444; color: #fff; padding: 6px; text-align: center; border-radius: 4px; font-family: monospace; font-size: 14px;">
-              <span style="align-self: center; color: #888; font-weight: bold;">:</span>
-              <input type="number" id="timer-sec" min="0" max="59" placeholder="Sek" style="width: 65px; background: #222; border: 1px solid #444; color: #fff; padding: 6px; text-align: center; border-radius: 4px; font-family: monospace; font-size: 14px;">
-            </div>
-
-            <div style="display: flex; gap: 8px; justify-content: center;">
-              <button id="timer-start-btn" onclick="toggleTimer()" style="flex: 1; padding: 8px; background: #4CAF50; border: none; color: white; border-radius: 4px; cursor: pointer; font-family: monospace; font-weight: bold; transition: opacity 0.15s;">Start</button>
-              <button onclick="resetTimer()" style="padding: 8px; background: #ff4444; border: none; color: white; border-radius: 4px; cursor: pointer; font-family: monospace; font-weight: bold; transition: opacity 0.15s;">Reset</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="taskbar">
-        <div class="taskbar-content">
-          <div class="taskbar-apps">
-            <button class="taskbar-app" data-app="welcome" title="Welcome">🏠</button>
-            <button class="taskbar-app" data-app="Hackspace" title="Hackspace">📁</button>
-            <button class="taskbar-app" data-app="app3" title="Taschenrechner">🧮</button>
-            <button class="taskbar-app" data-app="terminal" title="Terminal">📟</button>
-            <button class="taskbar-app" data-app="app5" title="Hacknotes">📝</button>
-            <button class="taskbar-app" data-app="app6" title="Hackclock">⏱️</button>
-          </div>
-        </div>
       </div>
     </div>
 
     <script>
-      function updateTime() {
-        var now = new Date();
-        var options = { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'};
-        var formattedTime = now.toLocaleString('en-US', options).replace(',', '');
-        document.querySelector('.top-right').textContent = formattedTime;
-      }
-      setInterval(updateTime, 1000);
-      updateTime();
+      document.querySelectorAll('.windowheader').forEach(header => {
+        header.addEventListener('mousedown', (e) => {
+          const win = header.closest('.window');
+          
+          let startX = e.clientX;
+          let startY = e.clientY;
+          let startLeft = win.offsetLeft;
+          let startTop = win.offsetTop;
+
+          function onMouseMove(e) {
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            win.style.left = `${startLeft + dx}px`;
+            win.style.top = `${startTop + dy}px`;
+          }
+
+          function onMouseUp() {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+          }
+
+          document.addEventListener('mousemove', onMouseMove);
+          document.addEventListener('mouseup', onMouseUp);
+        });
+      });
     </script>
-    <script src="script.js"></script>
   </body>
 </html>
